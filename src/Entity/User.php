@@ -16,7 +16,10 @@
      * @ApiResource(
      *     attributes={
      *          "pagination_enbaled"=true
-     *     }
+     *     },
+     *     normalizationContext={
+         *     "groups"={"users_read"}
+     *      }
      * )
      * @UniqueEntity("email", message="Un utilisateur ayant cette adresse email existe déjà")
      */
@@ -25,13 +28,13 @@
          * @ORM\Id()
          * @ORM\GeneratedValue()
          * @ORM\Column(type="integer")
-         * @Groups({"invoices_read", "customers_read", "invoices_subresource"})
+         * @Groups({"customers_read", "invoices_read", "invoices_subresource", "users_read"})
          */
         private $id;
         
         /**
          * @ORM\Column(type="string", length=180, unique=true)
-         * @Groups({"invoices_read", "customers_read", "invoices_subresource"})
+         * @Groups({"customers_read", "invoices_read", "invoices_subresource", "users_read"})
          * @Assert\NotBlank(message="Veuillez saisir votre email")
          * @Assert\Email(message="Veuillez saisir une adresse email valide")
          */
@@ -51,7 +54,7 @@
         
         /**
          * @ORM\Column(type="string", length=255)
-         * @Groups({"invoices_read", "customers_read", "invoices_subresource"})
+         * @Groups({"customers_read", "invoices_read", "invoices_subresource", "users_read"})
          * @Assert\NotBlank(message="Veuillez saisir votre prénom")
          * @assert\Length(min=3, minMessage="Veuillez saisir au minimum 3 caractère",
          *     max=255, maxMessage="Veuillez saisir au maximum 255 caractère")
@@ -60,7 +63,7 @@
         
         /**
          * @ORM\Column(type="string", length=255)
-         * @Groups({"invoices_read", "customers_read", "invoices_subresource"})
+         * @Groups({"customers_read", "invoices_read", "invoices_subresource", "users_read"})
          * @Assert\NotBlank(message="Veuillez saisir votre nom")
          * @assert\Length(min=3, minMessage="Veuillez saisir au minimum 3 caractère",
          *     max=255, maxMessage="Veuillez saisir au maximum 255 caractère")
