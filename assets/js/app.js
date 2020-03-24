@@ -1,11 +1,30 @@
 import React from "react";
-import ReactDOM from "react-dom"
+import ReactDOM from "react-dom";
+import {HashRouter, Route, Switch} from "react-router-dom";
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
+import HomePage from "./pages/HomePage";
+import CustomersPage from "./pages/CustomersPage"
+import CustomersPageWithPagination from "./pages/CustomersPageWithPagination"
 
-import '../css/app.css';
+require("../css/app.css");
 
 const App = () => {
-    return <h1>A</h1>;
-}
+    return (
+        <HashRouter>
+            <NavBar/>
+
+            <main className="container pt-5">
+                <Switch>
+                    <Route path="/customerspagination" component={CustomersPageWithPagination} />
+                    <Route path="/customers" component={CustomersPage} />
+                    <Route path="/" component={HomePage} />
+                </Switch>
+            </main>
+            <Footer/>
+        </HashRouter>
+    );
+};
 
 const rootElement = document.querySelector('#app');
-ReactDOM.render(<App />, rootElement);
+ReactDOM.render(<App/>, rootElement);
