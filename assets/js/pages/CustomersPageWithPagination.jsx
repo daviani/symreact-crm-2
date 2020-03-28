@@ -84,9 +84,9 @@ const CustomersPageWithPagination = props => {
                         <td>{customer.email}</td>
                         <td>{customer.company}</td>
                         <td className="text-center">
-                <span className="badge badge-primary">
+                  <span className="badge badge-primary">
                     {customer.invoices.length}
-                </span>
+                  </span>
                         </td>
                         <td className="text-center">
                             {customer.totalAmount.toLocaleString()} €

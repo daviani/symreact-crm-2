@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from "react";
 import Pagination from "../components/Pagination";
-
-import CustomersAPI from "../services/CustomersAPI"
+import CustomersAPI from "../services/CustomersAPI";
 
 const CustomersPage = props => {
-
     const [customers, setCustomers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
@@ -12,28 +10,28 @@ const CustomersPage = props => {
     //Requête HTTP get axios pour récupérer les customers
     const fetchCustomers = async () => {
         try {
-            const data = await CustomersAPI.findAll()
-            setCustomers(data)
+            const data = await CustomersAPI.findAll();
+            setCustomers(data);
         } catch (error) {
             console.log(error.response)
         }
-    }
-    useEffect(() => fetchCustomers(), [])
+    };
+    useEffect(() => {
+        fetchCustomers();
+    }, []);
 
     //Requête HTTP delete pour la suppresion des customers
     const handleDelete = async id => {
         //Clone du mon tableaux initial
         const originalCustomers = [...customers];
-
-        setCustomers(customers.filter(customer => customer.id !== id))
-
+        setCustomers(customers.filter(customer => customer.id !== id));
         try {
-            await CustomersAPI.delete(id)
+            await CustomersAPI.delete(id);
         } catch (error) {
-            //Si cela la requete dele ne marche pas
+            console.error(error.response);
             setCustomers(originalCustomers);
         }
-    }
+    };
 
     // Gestion du changement de page
     const handlePageChange = page => setCurrentPage(page);
@@ -150,6 +148,6 @@ const CustomersPage = props => {
             )}
         </>
     );
-}
+};
 
 export default CustomersPage;
