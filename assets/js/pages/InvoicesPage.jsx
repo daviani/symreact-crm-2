@@ -21,6 +21,7 @@ const InvoicesPage = () => {
     const [search, setSearch] = useState("");
     const itemsPerPage = 9;
 
+    //Récupération des invoices
     const fetchInvoices = async () => {
         try {
             const data = await InvoicesAPI.findAll();
@@ -45,26 +46,24 @@ const InvoicesPage = () => {
         setCurrentPage(1);
     };
 
-    //Requête HTTP delete pour la supresion des customers
+    //Requête HTTP delete pour la suppresion des customers
     const handleDelete = async id => {
         const originalInvoices = [...invoices];
         setInvoices(invoices.filter(invoice => invoice.id !== id));
         try {
             await InvoicesAPI.delete(id);
+            console.log("La facture a bien été supprimée");
         } catch (error) {
-            console.log(error.response);
+            console.log("Une erreur est survenue");
             setInvoices(originalInvoices);
         }
     };
-
-    //Formatage de la date avec moment.js
-    const formatDate = str => moment(str).format("DD/MM/YYYY");
 
     // Gestion de la recherche :
     const filteredInvoices = invoices.filter(
         i => i.customer.firstName.toLowerCase().includes(search.toLowerCase()) ||
             i.customer.lastName.toLowerCase().includes(search.toLowerCase()) ||
-            i.chrono.toString().startsWith(search.toLowerCase()) ||
+            i.amount.toString().startsWith(search.toLowerCase()) ||
             STATUS_LABELS[i.status].toLowerCase().includes(search.toLowerCase())
     );
 
@@ -74,6 +73,9 @@ const InvoicesPage = () => {
         currentPage,
         itemsPerPage
     );
+
+    //Formatage de la date avec moment.js
+    const formatDate = str => moment(str).format("DD/MM/YYYY");
 
     return (
         <>

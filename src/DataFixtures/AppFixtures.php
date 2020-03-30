@@ -31,6 +31,7 @@
                 $chrono = 1;
 
                 $hash = $this->encoder->encodePassword( $user, 'lol' );
+
                 $user->setFirstName($faker->firstName())
                      ->setLastName($faker->lastName)
                      ->setEmail($faker->email)
