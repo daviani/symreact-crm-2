@@ -1,15 +1,18 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {NavLink} from 'react-router-dom';
 import AuthAPI from "../services/AuthAPI";
+import AuthContext from "../context/AuthContext";
 
 
-const NavBar = ({isAuthenticated, onLogout, history}) => {
+const NavBar = ({history}) => {
+
+    const {isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
 
     const handleLogout = () => {
         //Requête de déconnection
         AuthAPI.logout();
         //On passe le state à false
-        onLogout(false);
+        setIsAuthenticated(false);
         //On redirige vers "/"
         history.push("/");
     };
@@ -72,7 +75,7 @@ const NavBar = ({isAuthenticated, onLogout, history}) => {
             </div>
         </nav>
     );
-}
+};
 
 export default NavBar;
 

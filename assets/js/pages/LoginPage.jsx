@@ -1,8 +1,10 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import { NavLink } from 'react-router-dom';
 import AuthAPI from "../services/AuthAPI";
+import AuthContext from "../context/AuthContext";
 
-const LoginPage = ({onLogin, history }) => {
+const LoginPage = ({history }) => {
+    const {setIsAuthenticated} = useContext(AuthContext);
     const [credentials, setCredentials] = useState({
         username: "",
         password: ""
@@ -23,7 +25,7 @@ const LoginPage = ({onLogin, history }) => {
             //Pas d'erreur
             setError("");
             //On passe le state à true
-            onLogin(true);
+            setIsAuthenticated(true);
             //On replace l'url actuel par "/customers"
             history.replace("/customers");
             console.log("connection initial --OK")
