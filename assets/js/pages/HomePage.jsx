@@ -13,8 +13,8 @@ const HomePage = (props) => {
                     <a className="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
                 </p>
         </div>
-    ) ;
-}
+    )
+};
 
 export default HomePage ;
 
