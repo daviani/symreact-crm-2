@@ -1,17 +1,28 @@
 import axios from "axios" ;
 import jwtDecode from "jwt-decode";
-import CustomersAPI from "../services/CustomersAPI";
 
+/**
+ * Déconnexion (suppression du token JWT)
+ */
 function logout() {
     window.localStorage.removeItem("authToken");
     delete axios.defaults.headers["Authorization"];
     console.log("disconnect --logout()")
 }
 
+/**
+ * Positionne le token JWT sur axios
+ * @param {string}token
+ */
 function setAxiosToken(token) {
     axios.defaults.headers["Authorization"] = "Bearer " + token;
 }
 
+/**
+ * Requête HTTP d'authentification et stockage du token sur le localStorage et Axios
+ * @param {object} credentials
+ * @returns {Promise<AxiosResponse<any>>}
+ */
 function authenticate(credentials) {
     return axios
         .post("http://127.0.0.1:8000/api/login_check", credentials)
@@ -24,7 +35,9 @@ function authenticate(credentials) {
         });
 }
 
-
+/**
+ * Mise en place du Token lors du chargement de l'application
+ */
 function setup() {
     //Voir si Token existe
     const token = window.localStorage.getItem("authToken");
@@ -45,6 +58,10 @@ function setup() {
     }
 }
 
+/**
+ * Permet de savoir si l'on est authentifier
+ * @returns {boolean}
+ */
 
 function isAuthenticated() {
     const token = window.localStorage.getItem("authToken");

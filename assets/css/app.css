@@ -21,7 +21,7 @@ html {
 }
 
 .main-logo {
-    height: 70px;
+    height: 70px!important;
 }
 
 .border-delete {
@@ -31,4 +31,12 @@ html {
 .c-width {
     width: 70px;
     text-align: center;
+}
+
+.p-custom-1 {
+    margin-top: -10px;
+}
+
+.h-48 {
+    height: 48px;
 }

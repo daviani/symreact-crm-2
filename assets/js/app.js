@@ -6,10 +6,14 @@ import Footer from "./components/Footer";
 import PrivateRoute from "./components/PrivateRoute";
 import HomePage from "./pages/HomePage";
 import CustomersPage from "./pages/CustomersPage";
-import InvoicesPage from "./pages/InvoicesPage"
+import InvoicePage from "./pages/InvoicePage";
+import InvoicesPage from "./pages/InvoicesPage";
 import LoginPage from "./pages/LoginPage";
+import Register from "./pages/RegisterPage";
+import CustomerPage from "./pages/CustomerPage";
 import AuthAPI from "./services/AuthAPI";
 import AuthContext from "./context/AuthContext";
+
 
 require("../css/app.css");
 
@@ -38,14 +42,15 @@ const App = () => {
 
                 <main className="container pt-5">
                     <Switch>
-                        <Route
-                            path="/login" component={LoginPage}/>
+                        <Route path="/register" component={Register}/>
+                        <Route path="/login" component={LoginPage}/>
+                        <PrivateRoute path="/invoices/:id" component={InvoicePage}/>
                         <PrivateRoute path="/invoices" component={InvoicesPage}/>
+                        <PrivateRoute path="/customers/:id" component={CustomerPage}/>
                         <PrivateRoute path="/customers" component={CustomersPage}/>
                         <Route path="/" component={HomePage}/>
                     </Switch>
                 </main>
-                <Footer/>
             </HashRouter>
         </AuthContext.Provider>
     );
@@ -55,3 +60,4 @@ const rootElement = document.querySelector('#app');
 ReactDOM.render(<App/>, rootElement);
 
 // <Route path="/customerspagination" component={CustomersPageWithPagination}/>
+//        <!--  <Footer/> -->

@@ -41,9 +41,8 @@
          * @ORM\Column(type="string", length=255)
          * @Groups({"customers_read", "invoices_read"})
          * @Assert\NotBlank(message="Veuillez saisir votre prénom")
-         * @assert\Length(min=3, minMessage="Veuillez saisir au minimum 3
-         *                       caractère", max=255, maxMessage="Veuillez
-         *                       saisir au maximum 255 caractère")
+         * @assert\Length(min=3, minMessage="Veuillez saisir au minimum 3 caractère",
+         *               max=255, maxMessage="Veuillez saisir au maximum 255 caractère")
          */
         private $firstName;
 
@@ -51,9 +50,8 @@
          * @ORM\Column(type="string", length=255)
          * @Groups({"customers_read", "invoices_read"})
          * @Assert\NotBlank(message="Veuillez saisir votre nom")
-         * @assert\Length(min=3, minMessage="Veuillez saisir au minimum 3
-         *                       caractère", max=255, maxMessage="Veuillez
-         *                       saisir au maximum 255 caractère")
+         * @assert\Length(min=3, minMessage="Veuillez saisir au minimum 3 caractère",
+         *                       max=255,  maxMessage="Veuillez saisir au maximum 255 caractère")
          */
         private $lastName;
 

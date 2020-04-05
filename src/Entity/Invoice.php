@@ -49,10 +49,8 @@
         /**
          * @ORM\Column(type="float")
          * @Groups({"invoices_read", "customers_read", "invoices_subresource"})
-         * @Assert\NotBlank(message="Veuillez saisir un montant pour votre
-         *                                    facture")
-         * @Assert\Type(type="numeric", message="Veuillez saisir un montant de
-         *                              type numérique")
+         * @Assert\NotBlank(message="Veuillez saisir un montant pour votre facture")
+         * @Assert\Type(type="numeric", message="Veuillez saisir un montant de type numérique")
          */
         private $amount;
 
@@ -83,10 +81,8 @@
         /**
          * @ORM\Column(type="integer")
          * @Groups({"invoices_read", "customers_read", "invoices_subresource"})
-         * @Assert\NotBlank(message="Il faut absolument un chrono pour la
-         *                              facture")
-         * @Assert\Type(type="integer", message="Le chrono doit être un nombre
-         *                              !")
+         * @Assert\NotBlank(message="Il faut absolument un chrono pour la facture")
+         * @Assert\Type(type="integer", message="Le chrono doit être un nombre!")
          */
         private $chrono;
 

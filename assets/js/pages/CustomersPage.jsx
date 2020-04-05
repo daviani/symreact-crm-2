@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Pagination from "../components/Pagination";
 import CustomersAPI from "../services/CustomersAPI";
+import {Link, NavLink} from "react-router-dom";
 
 const CustomersPage = props => {
     const [customers, setCustomers] = useState([]);
@@ -62,8 +63,14 @@ const CustomersPage = props => {
 
     return (
         <>
-            <h1 className="ml-5"> Liste des Clients</h1>
-
+            <div className=" mb-4 d-flex justify-content-between align-items-center">
+                <h1>
+                    Liste des Clients
+                </h1>
+                <Link to="/customers/new" className="btn btn-primary border-delete">
+                    Créer un client
+                </Link>
+            </div>
             <div className="form-group">
                 <input
                     type="text"
@@ -102,14 +109,14 @@ const CustomersPage = props => {
                 {paginatedCustomers.map(customer =>
                     <tr key={customer.id}>
                         <td className="text-center mt-5">
-                            <a href="#">
+                            <Link to={"customers/" +customer.id}>
                                 {customer.id}
-                            </a>
+                            </Link>
                         </td>
                         <td className="text-center mt-5">
-                            <a href="#">
+                            <Link to={"/customers/" + customer.id}>
                                 {customer.firstName} {customer.lastName}
-                            </a>
+                            </Link>
                         </td>
                         <td className="text-center mt-5">
                             {customer.email}

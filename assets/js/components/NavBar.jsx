@@ -1,5 +1,5 @@
-import React, {useContext} from 'react';
-import {NavLink} from 'react-router-dom';
+import React, {useContext} from "react";
+import {Link, NavLink} from "react-router-dom";
 import AuthAPI from "../services/AuthAPI";
 import AuthContext from "../context/AuthContext";
 
@@ -54,23 +54,22 @@ const NavBar = ({history}) => {
                 <ul className="navbar-nav ml-auto mr-3">
                     {!isAuthenticated && <>
                         <li className="nav-item ml-3 mr-3">
-                            <NavLink className="nav-link border-primary" to="/register">
+                            <NavLink className="nav-link border-secondary border-delete h-48" to="/register">
                                 Inscription
                             </NavLink>
                         </li>
                         <li className="nav-item ml-3 mr-3">
-                            <NavLink className="btn btn-primary" to="/login">
+                            <NavLink className="btn btn-primary border-delete" to="/login">
                                 Connexion
                             </NavLink>
                         </li>
-                    </> ||
-                    <li className="nav-item">
-                        <button onClick={handleLogout} className="btn btn-danger ml-3 mr-3">
-                            Déconnexion
-                        </button>
-                    </li>
-                    }
-
+                    </> || <>
+                        <li className="nav-item ">
+                            <button onClick={handleLogout} className="btn btn-danger border-delete ml-3 mr-3">
+                                Déconnexion
+                            </button>
+                        </li>
+                    </>}
                 </ul>
             </div>
         </nav>

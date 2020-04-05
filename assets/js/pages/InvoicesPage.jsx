@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import moment from "moment";
 import Pagination from "../components/Pagination";
 import InvoicesAPI from "../services/InvoicesAPI";
+import {Link} from "react-router-dom";
 
 const STATUS_CLASSES = {
     PAID: "success",
@@ -41,7 +42,7 @@ const InvoicesPage = () => {
     const handlePageChange = page => setCurrentPage(page);
 
     // Gestion de la recherche
-    const handleSearch = ({ currentTarget }) => {
+    const handleSearch = ({currentTarget}) => {
         setSearch(currentTarget.value);
         setCurrentPage(1);
     };
@@ -79,7 +80,15 @@ const InvoicesPage = () => {
 
     return (
         <>
-            <h1>Listes des factures</h1>
+            <div className=" mb-4 d-flex justify-content-between align-items-center">
+                <h1>
+                    Listes des factures
+                </h1>
+
+                <Link to="/invoices/new" className="btn btn-primary border-delete">
+                    Créer une facture
+                </Link>
+            </div>
             <div className="form-group">
                 <input
                     type="text"
@@ -124,9 +133,9 @@ const InvoicesPage = () => {
                             {invoice.amount.toLocaleString("fr-FR")} €
                         </td>
                         <td>
-                            <button className="btn btn-sm btn-success border-delete mr-3">
+                            <Link to={"/invoices/" +invoice.id} className="btn btn-sm btn-success border-delete mr-3">
                                 Editer
-                            </button>
+                            </Link>
                             <button className="btn btn-sm btn-danger border-delete"
                                     onClick={() => handleDelete(invoice.id)}>
                                 Supprimer

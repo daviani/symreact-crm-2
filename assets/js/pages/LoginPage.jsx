@@ -1,9 +1,10 @@
 import React, {useState, useContext} from "react";
-import { NavLink } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import AuthAPI from "../services/AuthAPI";
 import AuthContext from "../context/AuthContext";
+import Field from "../components/forms/Field";
 
-const LoginPage = ({history }) => {
+const LoginPage = ({history}) => {
     const {setIsAuthenticated} = useContext(AuthContext);
     const [credentials, setCredentials] = useState({
         username: "",
@@ -38,40 +39,31 @@ const LoginPage = ({history }) => {
         <>
             <div className="container jumbotron">
                 <h1 className="display-3">Connexion</h1>
-                <form className="ml-5"
-                      onSubmit={handleSubmit}>
-                    <div className="form-group col-6">
-                        <label htmlFor="username">Adresse électronique</label>
-                        <input value={credentials.username}
-                               onChange={handleChange}
-                               type="email"
-                               className={"form-control" + (error && " is-invalid")}
-                               id="username"
-                               aria-describedby="emailHelp"
-                               placeholder="Entrez votre adresse électronique"
-                               name="username"
-                        />
-                        {error && <p className="invalid-feedback">
-                            {error}
-                        </p>}
-                        <small id="emailHelp" className="form-text text-muted">
-                            Nous ne partagerons jamais votre courrier électronique avec qui que ce soit d'autre part.
-                        </small>
-                    </div>
-                    <div className="form-group col-6">
-                        <label htmlFor="password">Mot de passe</label>
-                        <input value={credentials.password}
-                               onChange={handleChange}
-                               type="password"
-                               className="form-control"
-                               id="password1"
-                               placeholder="Mot de passe"
-                               name="password"
-                        />
-                    </div>
-                        <button type="submit" className="btn btn-primary">
-                            Soumettre
-                        </button>
+                <form className="ml-5" onSubmit={handleSubmit}>
+                    <Field
+                        name="username"
+                        label="Adresse électronique"
+                        value={credentials.username}
+                        onChange={handleChange}
+                        placeholder="Entrez votre adresse électronique"
+                        type="email"
+                        error={error}
+                    />
+                    <small id="emailHelp" className="form-text text-muted ml-3 p-custom-1">
+                        Nous ne partagerons jamais votre courrier électronique avec qui que ce soit d'autre part.
+                    </small>
+                    <Field
+                        name="password"
+                        label="Mot de passe"
+                        value={credentials.password}
+                        onChange={handleChange}
+                        placeholder="Entrez votre mot de passe"
+                        type="password"
+                        error=""
+                    />
+                    <button type="submit" className="btn btn-primary border-delete mt-3">
+                        Soumettre
+                    </button>
                 </form>
             </div>
         </>
@@ -79,4 +71,3 @@ const LoginPage = ({history }) => {
 };
 
 export default LoginPage;
-
