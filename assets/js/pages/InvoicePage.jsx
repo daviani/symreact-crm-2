@@ -4,9 +4,12 @@ import {Link} from "react-router-dom";
 import Select from "../components/forms/Select";
 import CustomersAPI from "../services/CustomersAPI";
 import InvoicesAPI from "../services/InvoicesAPI";
+import {toast} from "react-toastify";
+import FormContentLoader from "../components/loader/FormContentLoader";
 
 const InvoicePage = ({history, match}) => {
     const {id = "new"} = match.params;
+    const [loading, setloading] = useState(true);
     const [editingState, setEditingState] = useState(false);
     const [invoiceState, setInvoiceState] = useState({
         amount: "",
@@ -25,13 +28,14 @@ const InvoicePage = ({history, match}) => {
         try {
             const data = await CustomersAPI.findAll();
             setCustomerListState(data);
+            setloading(false);
             if (!invoiceState.customer) {
                 setInvoiceState({
                     ...invoiceState, customer: data[0].id
                 });
             }
         } catch (e) {
-            console.log(e.response);
+            toast.error("impossible de charger les clients");
             history.replace("/invoices");
         }
     };
@@ -41,9 +45,9 @@ const InvoicePage = ({history, match}) => {
         try {
             const {amount, status, customer} = await InvoicesAPI.find(id);
             setInvoiceState({amount, status, customer: customer.id});
-            console.log("facture bien recup");
+            setloading(false);
         } catch (e) {
-            console.error("bug casse couille");
+            toast.error("Votre facture n'as pu être charger");
             history.replace("/invoices");
         }
     };
@@ -71,12 +75,13 @@ const InvoicePage = ({history, match}) => {
     const handleSubmit = async event => {
         event.preventDefault();
         try {
-            if(editingState) {
+            if (editingState) {
                 await InvoicesAPI.update(invoiceState, id);
-                console.log("facture modifier");
+                toast.success("La facture bien été modifier");
+                history.replace("/invoices");
             } else {
                 await InvoicesAPI.create(invoiceState);
-                console.log("facture créer");
+                toast.success("La facture bien été créer");
                 history.replace("/invoices");
             }
             // TODO : faire un componant de gestion d'erreur
@@ -88,7 +93,7 @@ const InvoicePage = ({history, match}) => {
                     apiErrors[propertyPath] = message;
                 });
                 setErrorsState(apiErrors);
-                console.log("Des erreurs dans votre formulaire !");
+                toast.error("Des erreurs dans votre formulaire !");
             }
         }
     };
@@ -100,6 +105,8 @@ const InvoicePage = ({history, match}) => {
                     <h1>Création d'une facture</h1>) ||
                 (<h1>Modification d'une facture</h1>
                 )}
+                {loading && <FormContentLoader/>}
+                {!loading &&
                 <form onSubmit={handleSubmit}>
                     <Field
                         name="amount"
@@ -149,6 +156,8 @@ const InvoicePage = ({history, match}) => {
                         </Link>
                     </div>
                 </form>
+                }
+
             </div>
         </>
     );

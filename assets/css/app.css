@@ -37,6 +37,10 @@ html {
     margin-top: -10px;
 }
 
+.btn-custom {
+    cursor: pointer;
+  }
+
 .h-48 {
     height: 48px;
 }

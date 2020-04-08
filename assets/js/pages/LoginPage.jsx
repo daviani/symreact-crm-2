@@ -3,6 +3,7 @@ import {NavLink} from 'react-router-dom';
 import AuthAPI from "../services/AuthAPI";
 import AuthContext from "../context/AuthContext";
 import Field from "../components/forms/Field";
+import {toast} from "react-toastify";
 
 const LoginPage = ({history}) => {
     const {setIsAuthenticated} = useContext(AuthContext);
@@ -26,12 +27,13 @@ const LoginPage = ({history}) => {
             //Pas d'erreur
             setError("");
             //On passe le state à true
+            toast.success('Vous êtes bien connecté');
             setIsAuthenticated(true);
             //On replace l'url actuel par "/customers"
             history.replace("/customers");
-            console.log("connection initial --OK")
         } catch (e) {
-            setError("Votre adresse éléctronique n'est pas enregistré ou votre mot de passe est incorrect");
+            setError("Une erreur est survenue :/ ");
+            toast.error("Une erreur est survenue");
         }
     };
 

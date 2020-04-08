@@ -3,6 +3,9 @@ import moment from "moment";
 import Pagination from "../components/Pagination";
 import InvoicesAPI from "../services/InvoicesAPI";
 import {Link} from "react-router-dom";
+import {toast} from "react-toastify";
+import TableLoader from "../components/loader/TableLoader";
+import {Icon} from "semantic-ui-react";
 
 const STATUS_CLASSES = {
     PAID: "success",
@@ -17,6 +20,7 @@ const STATUS_LABELS = {
 };
 
 const InvoicesPage = () => {
+    const [loading, setloading] = useState(true);
     const [invoices, setInvoices] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
@@ -27,8 +31,9 @@ const InvoicesPage = () => {
         try {
             const data = await InvoicesAPI.findAll();
             setInvoices(data);
+            setloading(false);
         } catch (error) {
-            console.log(error.response);
+            toast.error("Votre liste de facture n'as pu être charger");
         }
     };
 
@@ -53,9 +58,9 @@ const InvoicesPage = () => {
         setInvoices(invoices.filter(invoice => invoice.id !== id));
         try {
             await InvoicesAPI.delete(id);
-            console.log("La facture a bien été supprimée");
+            toast.success("La facture a bien été supprimée");
         } catch (error) {
-            console.log("Une erreur est survenue");
+            toast.error("Une erreur est survenue");
             setInvoices(originalInvoices);
         }
     };
@@ -109,42 +114,48 @@ const InvoicesPage = () => {
                     <th/>
                 </tr>
                 </thead>
-                <tbody>
-                {paginatedInvoices.map(invoice => (
-                    <tr key={invoice.id}>
-                        <td className="text-center">
-                            {invoice.chrono}
-                        </td>
-                        <td className="text-center">
-                            <a href="#">
-                                {invoice.customer.firstName}{" "}
-                                {invoice.customer.lastName}
-                            </a>
-                        </td>
-                        <td className="text-center">
-                            {formatDate(invoice.sendAt)}
-                        </td>
-                        <td className="text-center">
-                            <button className={"c-width btn btn-sm btn-" + STATUS_CLASSES[invoice.status]}>
-                                {STATUS_LABELS[invoice.status]}
-                            </button>
-                        </td>
-                        <td className="text-center">
-                            {invoice.amount.toLocaleString("fr-FR")} €
-                        </td>
-                        <td>
-                            <Link to={"/invoices/" +invoice.id} className="btn btn-sm btn-success border-delete mr-3">
-                                Editer
-                            </Link>
-                            <button className="btn btn-sm btn-danger border-delete"
-                                    onClick={() => handleDelete(invoice.id)}>
-                                Supprimer
-                            </button>
-                        </td>
-                    </tr>
-                ))}
-                </tbody>
+
+                {!loading && (
+                    <tbody>
+                    {paginatedInvoices.map(invoice => (
+                        <tr key={invoice.id}>
+                            <td className="text-center">
+                                {invoice.chrono}
+                            </td>
+                            <td className="text-center">
+                                <Link to={"/invoices/" + invoice.id}>
+                                    {invoice.customer.firstName}{" "}
+                                    {invoice.customer.lastName}
+                                </Link>
+                            </td>
+                            <td className="text-center">
+                                {formatDate(invoice.sendAt)}
+                            </td>
+                            <td className="text-center">
+                                <button className={"c-width btn btn-sm btn-" + STATUS_CLASSES[invoice.status]}>
+                                    {STATUS_LABELS[invoice.status]}
+                                </button>
+                            </td>
+                            <td className="text-center">
+                                {invoice.amount.toLocaleString("fr-FR")} €
+                            </td>
+                            <td>
+                                <Link to={"/invoices/" + invoice.id}
+                                      className="ml-2 mr-4">
+                                    <Icon size="large" name="edit" color="orange"/>
+                                </Link>
+                                <btn onClick={() => handleDelete(invoice.id)}
+                                className="btn-custom">
+                                    <Icon size="large" name="trash" color="red"/>
+                                </btn>
+                            </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                )}
             </table>
+
+            {loading && <TableLoader/>}
             <Pagination
                 currentPage={currentPage}
                 itemsPerPage={itemsPerPage}

@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import Field from "../components/forms/Field";
 import {Link} from "react-router-dom";
 import UserAPI from "../services/UserAPI";
+import {toast} from "react-toastify";
 
 const RegisterPage = ({history}) => {
 
@@ -28,33 +29,32 @@ const RegisterPage = ({history}) => {
         setUserState({...userState, [name]: value});
     };
 
-    //Envoie du formulaire et gestion des erreurs
+    // Gestion de la soumission
     const handleSubmit = async event => {
         event.preventDefault();
         const apiErrors = {};
 
         if (userState.password !== userState.passwordConfirm) {
-            apiErrors.passwordConfirm = "Vos mot de passe sont différents…";
+            apiErrors.passwordConfirm =
+                "Votre confirmation de mot de passe n'est pas conforme avec le mot de passe original";
             setErrorsState(apiErrors);
+            toast.error("Des erreurs dans votre formulaire !");
             return;
         }
 
         try {
             await UserAPI.register(userState);
-            setErrorsState({});
-            console.log("create user : 201");
+            toast.success("Vous êtes désormais inscrit, vous pouvez vous connecter !");
             history.replace("/login");
-            // TODO : faire un componant de gestion d'erreur
         } catch (error) {
             const {violations} = error.response.data;
             if (violations) {
-
-                violations.forEach(violation =>
-                    apiErrors[violation.propertyPath] = violation.message
-                );
+                violations.forEach(violation => {
+                    apiErrors[violation.propertyPath] = violation.message;
+                });
                 setErrorsState(apiErrors);
-                console.log("Des erreurs dans votre formulaire !");
             }
+            toast.error("Des erreurs dans votre formulaire !");
         }
     };
     return (
@@ -119,6 +119,3 @@ const RegisterPage = ({history}) => {
     );
 };
 export default RegisterPage;
-
-
-

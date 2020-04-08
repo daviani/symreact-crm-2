@@ -13,7 +13,8 @@ import Register from "./pages/RegisterPage";
 import CustomerPage from "./pages/CustomerPage";
 import AuthAPI from "./services/AuthAPI";
 import AuthContext from "./context/AuthContext";
-
+import {ToastContainer,Zoom} from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 require("../css/app.css");
 
@@ -25,13 +26,13 @@ const App = () => {
     );
     const NavBarWithRouter = withRouter(NavBar);
 
-// Bien si l'on s'en sert plusieurs fois
-//    const contextValue = {
-//        isAuthenticated,
-//        setIsAuthenticated
-//    };
+    // Bien si l'on s'en sert plusieurs fois
+    //    const contextValue = {
+    //        isAuthenticated,
+    //        setIsAuthenticated
+    //    };
 
-//TODO : faire une page d'erreur
+    //TODO : faire une page d'erreur
     return (
         <AuthContext.Provider value={{
             isAuthenticated,
@@ -52,11 +53,23 @@ const App = () => {
                     </Switch>
                 </main>
             </HashRouter>
+            <ToastContainer
+                transition={Zoom}
+                position="bottom-center"
+                autoClose={1500}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnVisibilityChange
+                draggable
+                pauseOnHover
+            />
         </AuthContext.Provider>
     );
 };
 
-const rootElement = document.querySelector('#app');
+const rootElement = document.querySelector("#app");
 ReactDOM.render(<App/>, rootElement);
 
 // <Route path="/customerspagination" component={CustomersPageWithPagination}/>
