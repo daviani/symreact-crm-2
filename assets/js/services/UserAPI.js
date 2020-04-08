@@ -1,7 +1,8 @@
 import axios from "axios";
+import {USER_API} from "../config";
 
 function register (userState) {
-    return axios.post("http://127.0.0.1:8000/api/users", userState);
+    return axios.post(USER_API, userState);
 }
 
 export default {

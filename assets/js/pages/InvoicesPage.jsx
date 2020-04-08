@@ -128,7 +128,7 @@ const InvoicesPage = () => {
                                     {invoice.customer.lastName}
                                 </Link>
                             </td>
-                            <td className="text-center">
+                            <td className="text-center v-align">
                                 {formatDate(invoice.sendAt)}
                             </td>
                             <td className="text-center">
@@ -141,13 +141,13 @@ const InvoicesPage = () => {
                             </td>
                             <td>
                                 <Link to={"/invoices/" + invoice.id}
-                                      className="ml-2 mr-4">
+                                      className="btn ml-2 mr-4">
                                     <Icon size="large" name="edit" color="orange"/>
                                 </Link>
-                                <btn onClick={() => handleDelete(invoice.id)}
-                                className="btn-custom">
+                                <button onClick={() => handleDelete(invoice.id)}
+                                        className="btn">
                                     <Icon size="large" name="trash" color="red"/>
-                                </btn>
+                                </button>
                             </td>
                         </tr>
                     ))}

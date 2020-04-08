@@ -1,24 +1,25 @@
 import axios from "axios";
+import {INVOICES_API} from "../config";
 
 function findAll () {
     return axios
-        .get("http://localhost:8000/api/invoices")
+        .get(INVOICES_API)
         .then(response => response.data["hydra:member"]);
 }
 
 function find (id) {
     return axios
-        .get("http://localhost:8000/api/invoices/" + id)
+        .get(INVOICES_API + "/" + id)
         .then(response => response.data);
 }
 
 function deleteInvoices (id) {
-    axios.delete("http://localhost:8000/api/invoices/" + id);
+    axios.delete(INVOICES_API + "/" + id);
 }
 
 function update (invoiceState, id) {
     return axios
-        .put("http://localhost:8000/api/invoices/" + id,
+        .put(INVOICES_API + "/" + id,
             {
                 ...invoiceState, customer: `/api/customers/${invoiceState.customer}`
             });
@@ -26,7 +27,7 @@ function update (invoiceState, id) {
 
 function create (invoiceState) {
     return axios
-        .post("http://localhost:8000/api/invoices",
+        .post(INVOICES_API,
             {
                 ...invoiceState, customer: `/api/customers/${invoiceState.customer}`
             });

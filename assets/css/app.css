@@ -39,8 +39,14 @@ html {
 
 .btn-custom {
     cursor: pointer;
+    background-color: white;
+    border-color: white;
   }
 
 .h-48 {
     height: 48px;
 }
+
+.v-align {
+    vertical-align: center!important;
+    }

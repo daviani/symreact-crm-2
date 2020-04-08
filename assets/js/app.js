@@ -56,7 +56,7 @@ const App = () => {
             <ToastContainer
                 transition={Zoom}
                 position="bottom-center"
-                autoClose={1500}
+                autoClose={3000}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick
