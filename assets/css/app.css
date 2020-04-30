@@ -3,6 +3,7 @@ body {
     padding: 0;
     height: 100%;
 }
+
 html {
     height: 100%;
     margin: 0;
@@ -21,7 +22,7 @@ html {
 }
 
 .main-logo {
-    height: 70px!important;
+    height: 70px !important;
 }
 
 .border-delete {
@@ -41,12 +42,12 @@ html {
     cursor: pointer;
     background-color: white;
     border-color: white;
-  }
+}
 
 .h-48 {
     height: 48px;
 }
 
 .v-align {
-    vertical-align: center!important;
-    }
+    vertical-align: center !important;
+}
