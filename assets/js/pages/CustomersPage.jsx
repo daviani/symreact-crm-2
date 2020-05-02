@@ -11,6 +11,7 @@ const CustomersPage = () => {
     const [customersState, setCustomersState]     = useState( [] )
     const [currentPageState, setCurrentPageState] = useState( 1 )
     const [search, setSearch]                     = useState( '' )
+    const itemsPerPage                            = 8
 
     //Requête HTTP get axios pour récupérer les customers
     const fetchCustomers = async () => {
@@ -48,8 +49,6 @@ const CustomersPage = () => {
         setSearch( currentTarget.value )
         setCurrentPageState( 1 )
     }
-
-    const itemsPerPage = 9
 
     //filtrage des customers en fonction de la recherche
     const filteredCustomers = customersState.filter(

@@ -2,6 +2,7 @@ import React, { useState }                       from 'react'
 import ReactDOM                                  from 'react-dom'
 import { HashRouter, Route, Switch, withRouter } from 'react-router-dom'
 import NavBar                                    from './components/NavBar'
+import Footer                                    from './components/Footer'
 import PrivateRoute                              from './components/PrivateRoute'
 import HomePage                                  from './pages/HomePage'
 import CustomersPage                             from './pages/CustomersPage'
@@ -10,6 +11,7 @@ import InvoicesPage                              from './pages/InvoicesPage'
 import LoginPage                                 from './pages/LoginPage'
 import Register                                  from './pages/RegisterPage'
 import CustomerPage                              from './pages/CustomerPage'
+import NotFoundPage                              from './pages/NotFoundPage'
 import AuthAPI                                   from './services/AuthAPI'
 import AuthContext                               from './context/AuthContext'
 import { ToastContainer, Zoom }                  from 'react-toastify'
@@ -24,6 +26,7 @@ const App = () => {
         AuthAPI.isAuthenticated()
     )
     const NavBarWithRouter                      = withRouter( NavBar )
+    const FooterWithRouter                      = withRouter( Footer )
 
     // Bien si l'on s'en sert plusieurs fois
     //    const contextValue = {
@@ -31,7 +34,6 @@ const App = () => {
     //        setIsAuthenticated
     //    };
 
-    //TODO : faire une page d'erreur
     return (
         <AuthContext.Provider value={ {
             isAuthenticated,
@@ -49,8 +51,10 @@ const App = () => {
                         <PrivateRoute path='/customers/:id' component={ CustomerPage }/>
                         <PrivateRoute path='/customers' component={ CustomersPage }/>
                         <Route path='/' component={ HomePage }/>
+                        <Route component={ NotFoundPage }/>
                     </Switch>
                 </main>
+                <FooterWithRouter />
             </HashRouter>
             <ToastContainer transition={ Zoom }
                             position='bottom-center'

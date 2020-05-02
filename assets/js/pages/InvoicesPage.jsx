@@ -24,7 +24,7 @@ const InvoicesPage = () => {
     const [invoices, setInvoices]       = useState( [] )
     const [currentPage, setCurrentPage] = useState( 1 )
     const [search, setSearch]           = useState( '' )
-    const itemsPerPage                  = 9
+    const itemsPerPage                  = 8
 
     //Récupération des invoices
     const fetchInvoices = async () => {
