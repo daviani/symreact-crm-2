@@ -1,5 +1,4 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=[path]
-    - composer install
+    - export DEPLOYPATH=/home/symreact-crm.fillatredav.fr/symreact-crm-2
