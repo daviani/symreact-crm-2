@@ -1,16 +1,32 @@
-import React from 'react'
+import React       from 'react'
+import { NavLink } from 'react-router-dom'
 
 const HomePage = () => {
     return (
         <div className='jumbotron'>
             <h1 className='display-3'>Hello, world!</h1>
-            <p className='lead'>This is a simple hero unit, a simple jumbotron-style component for calling extra
-                attention to featured content or information.</p>
-            <hr className='my-4'/>
-            <p>It uses utility classes for typography and spacing to space content out within the larger
-                container.</p>
             <p className='lead'>
-                <a className='btn btn-primary btn-lg' href='#' role='button'>Learn more</a>
+                Bienvenue sur mon application de gestion de facture.
+                Pour réaliser cette application, j'ai utilisé:
+                <ul className='mt-3'>
+                    <li>Symfony 5.0.8</li>
+                    <li>API Platform 1.2</li>
+                    <li>React 16.8.6</li>
+                    <li>JWT Token 2.6</li>
+                </ul>
+            </p>
+            <hr className='my-4'/>
+            <p>
+                Vous pouvez vous connecter avec ce compte demo :
+                <ul className='mt-3'>
+                    <li>Adresse électronique : demo@demo.fr</li>
+                    <li>Mot de passe : F9qa#Y8~</li>
+                </ul>
+            </p>
+            <p className='lead mt-3'>
+                <NavLink className='btn btn-primary' to='/login'>
+                    Connexion
+                </NavLink>
             </p>
         </div>
     )

@@ -77,14 +77,13 @@ const InvoicePage = ( {history, match} ) => {
         try {
             if ( editingState ) {
                 await InvoicesAPI.update( invoiceState, id )
-                toast.success( 'La facture bien été modifier' )
+                toast.success( 'La facture a bien été modifiée' )
                 history.replace( '/invoices' )
             } else {
                 await InvoicesAPI.create( invoiceState )
-                toast.success( 'La facture bien été créer' )
+                toast.success( 'La facture a bien été créée' )
                 history.replace( '/invoices' )
             }
-            // TODO : faire un componant de gestion d'erreur
         } catch ({response}) {
             const {violations} = response.data
             if ( violations ) {

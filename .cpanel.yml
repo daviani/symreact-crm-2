@@ -1,4 +1,0 @@
----
-deployment:
-  tasks:
-    - export DEPLOYPATH=/home/symreact-crm.fillatredav.fr/symreact-crm-2

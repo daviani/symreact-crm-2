@@ -31,7 +31,7 @@ const Footer = () => {
                     <div className="col-4 mt-5">
                         <p>
                             <strong>
-                                Made with <Icon name='heart' color='grey'/> by Daviani, with symfony, apiplateform and react
+                                Made with <Icon name='heart' color='grey'/> by Daviani, with Symfony, API Platform and React
                             </strong>
                         </p>
                     </div>

@@ -57,7 +57,7 @@ const App = () => {
                 <FooterWithRouter />
             </HashRouter>
             <ToastContainer transition={ Zoom }
-                            position='bottom-center'
+                            position='top-center'
                             autoClose={ 3000 }
                             hideProgressBar={ false }
                             newestOnTop={ false }
